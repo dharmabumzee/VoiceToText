@@ -10,6 +10,10 @@ mic.interimResults = true;
 mic.lang = "en-US";
 
 function App() {
+  const [isListening, setIsListening] = useState(false);
+  const [note, setNote] = useState(null);
+  const [savedNotes, setSavedNotes] = useState([]);
+
   return (
     <div className="container ">
       <div className="box">
