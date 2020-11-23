@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 
 const SpeechRecognition =
-  window.SpeechRecognition || window.webkitSpeechRecognition;
+  window.speechRecognition || window.webkitSpeechRecognition;
+
 const mic = new SpeechRecognition();
 
 mic.continuous = true;
@@ -13,6 +14,10 @@ function App() {
   const [isListening, setIsListening] = useState(false);
   const [note, setNote] = useState(null);
   const [savedNotes, setSavedNotes] = useState([]);
+
+  useEffect(() => {
+    handleListen();
+  }, [isListening]);
 
   const handleListen = () => {
     if (isListening) {
@@ -37,6 +42,7 @@ function App() {
         .map((result) => result.transcript)
         .join("");
       console.log(transcript);
+      setNote(transcript);
       mic.onerror = (event) => {
         console.log(event.error);
       };
@@ -44,7 +50,8 @@ function App() {
   };
 
   const handleSaveNote = () => {
-    console.log("handled");
+    setSavedNotes([...savedNotes, note]);
+    setNote("");
   };
 
   return (
