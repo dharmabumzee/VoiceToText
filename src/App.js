@@ -14,17 +14,28 @@ function App() {
   const [note, setNote] = useState(null);
   const [savedNotes, setSavedNotes] = useState([]);
 
+  const handleSaveNote = () => {
+    console.log("handled");
+  };
+
   return (
-    <div className="container ">
-      <div className="box">
-        <h2>Current Note</h2>
-        <button>Save Note</button>
-        <button>Start/Stop</button>
+    <>
+      <h1>Voice Notes</h1>
+      <div className="container ">
+        <div className="box">
+          <h2>Current Note</h2>
+          <button onClick={handleSaveNote} disabled={!note}>
+            Save Note
+          </button>
+          <button onClick={() => setIsListening((prevState) => !prevState)}>
+            Start/Stop
+          </button>
+        </div>
+        <div className="box">
+          <h2>Notes</h2>
+        </div>
       </div>
-      <div className="box">
-        <h2>Notes</h2>
-      </div>
-    </div>
+    </>
   );
 }
 
